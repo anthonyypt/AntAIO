@@ -5,22 +5,159 @@
   <title>Trackr - Order & Inventory Management</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f8fafc; color: #222; margin: 0; padding: 0; }
-    .container { max-width: 700px; margin: 40px auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px #0001; padding: 32px 24px; }
-    h1 { color: #0288d1; margin-top: 0; }
-    h2 { color: #1e293b; }
-    a { color: #0288d1; text-decoration: none; }
-    a.button { display: inline-block; background: #0288d1; color: #fff; padding: 10px 24px; border-radius: 5px; margin-top: 18px; font-weight: bold; }
-    .links { margin-top: 32px; }
-    .links a { margin-right: 24px; }
-    .footer { margin-top: 40px; color: #888; font-size: 0.95em; }
+    :root {
+      --primary: #0288d1;
+      --secondary: #1e293b;
+      --bg: #f8fafc;
+      --white: #fff;
+      --shadow: 0 4px 24px #0002;
+      --radius: 16px;
+      --transition: 0.3s cubic-bezier(.4,0,.2,1);
+    }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: var(--secondary);
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
+    .container {
+      max-width: 700px;
+      margin: 60px auto 0 auto;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 40px 32px 32px 32px;
+      animation: fadeInUp 1s;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    h1 {
+      color: var(--primary);
+      margin-top: 0;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+      animation: fadeIn 1.2s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0;}
+      to { opacity: 1;}
+    }
+    h2 {
+      color: var(--secondary);
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: 24px;
+      font-size: 1.3rem;
+      animation: fadeIn 1.4s;
+    }
+    ul {
+      margin: 24px 0 32px 0;
+      padding-left: 20px;
+      animation: fadeIn 1.6s;
+    }
+    li {
+      margin-bottom: 10px;
+      font-size: 1.08rem;
+      opacity: 0;
+      animation: fadeInList 0.7s forwards;
+    }
+    li:nth-child(1) { animation-delay: 0.2s;}
+    li:nth-child(2) { animation-delay: 0.4s;}
+    li:nth-child(3) { animation-delay: 0.6s;}
+    li:nth-child(4) { animation-delay: 0.8s;}
+    li:nth-child(5) { animation-delay: 1.0s;}
+    @keyframes fadeInList {
+      to { opacity: 1;}
+    }
+    .button {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--white);
+      padding: 14px 36px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-top: 18px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px #0288d133;
+      border: none;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      outline: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .button:after {
+      content: "";
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 0; height: 0;
+      background: rgba(255,255,255,0.2);
+      border-radius: 100%;
+      transform: translate(-50%, -50%);
+      transition: width 0.5s, height 0.5s;
+      z-index: 0;
+    }
+    .button:hover {
+      background: #0367a6;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 6px 24px #0288d144;
+    }
+    .button:active:after {
+      width: 200px;
+      height: 200px;
+      transition: 0s;
+    }
+    .links {
+      margin-top: 32px;
+      animation: fadeIn 2s;
+    }
+    .links a {
+      color: var(--primary);
+      margin-right: 32px;
+      font-weight: 500;
+      text-decoration: none;
+      position: relative;
+      transition: color var(--transition);
+    }
+    .links a:after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s;
+      position: absolute;
+      left: 0; bottom: -2px;
+    }
+    .links a:hover {
+      color: #0367a6;
+    }
+    .links a:hover:after {
+      width: 100%;
+    }
+    .footer {
+      margin-top: 48px;
+      color: #888;
+      font-size: 0.98em;
+      text-align: center;
+      animation: fadeIn 2.2s;
+    }
+    @media (max-width: 800px) {
+      .container { margin: 24px 8px; padding: 24px 8px;}
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Trackr</h1>
-    <h2>Order & Inventory Management Software</h2>
-    <p>
+    <h2>Order & Inventory Management</h2>
+    <p style="font-size:1.13rem;line-height:1.7;">
       <strong>Trackr</strong> is a desktop application for tracking online orders, managing inventory, and scraping order confirmation emails from Gmail.<br>
       Designed for collectors, resellers, and anyone who wants to keep their order and inventory data organized in one place.
     </p>
@@ -31,13 +168,13 @@
       <li>Privacy-focused: all data stored locally</li>
       <li>License key activation</li>
     </ul>
-    <a class="button" href="https://github.com/anthonyypt/AntAIO" target="_blank">View on GitHub</a>
+    <a class="button" href="https://github.com/anthonyypt/Trackr" target="_blank">View on GitHub</a>
     <div class="links">
       <a href="privacy.html">Privacy Policy</a>
       <a href="terms.html">Terms of Service</a>
     </div>
     <div class="footer">
-      &copy; 2024 Trackr. All rights reserved.<br>
+      &copy; 2025 Trackr. All rights reserved.<br>
       Not affiliated with Google or any online retailer.
     </div>
   </div>
